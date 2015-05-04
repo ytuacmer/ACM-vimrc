@@ -40,3 +40,12 @@ endfunc
 " For ACM
 nnoremap <Leader>ii :vs input<CR>
 nnoremap <Leader>io :vs ouput<CR>
+ 
+" temp file
+nnoremap <Leader>nt :call TempCpp()<CR>
+
+
+func! TempCpp()
+    execute '!rm /tmp/tmp.cpp'
+    execute 'e /tmp/tmp.cpp'
+endfunction
