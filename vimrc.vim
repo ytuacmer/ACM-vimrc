@@ -22,8 +22,19 @@ set foldmethod=indent                                 "indent 折叠方式
 set ignorecase                                        "搜索模式里忽略大小写
 set smartcase                                         "如果搜索模式包含大写字符，不使用 'ignorecase' 选项，只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用
 
+" 去除状态栏
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
 
+" 命令行补全
+set wildmenu
 
+" 窗口
+    winpos 10 10                                     "指定窗口出现的位置，坐标原点在屏幕左上角
+
+    set lines=38 columns=120                          "指定窗口大小，lines为高度，columns为宽度
 set guifont=DejaVu\ Sans\ Mono\ Bold\ 10              "设置字体:字号（字体名称空格用下划线代替）
 
 
