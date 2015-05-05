@@ -5,6 +5,7 @@
 " License: GPL
 
 
+set background=dark
 colo evening		                                  "evening
 syntax on  			                                  "syntax
 set laststatus=2                                      "启用状态栏信息
@@ -44,7 +45,7 @@ let mapleader = ","
 
 " Esc
 inoremap <Esc> <nop>
-inoremap qq <ESC>
+inoremap df <ESC>
 
 " file
 nnoremap <Leader>w :w<CR>
@@ -82,6 +83,8 @@ noremap <c-l> <c-w>l
 " F8 编译调试（仅限于单文件)
 noremap <F8> :call Debug()<CR>
 inoremap <F8> <ESC>:call Debug()<CR>
+noremap <F9> :call Run()<CR>
+inoremap <F9> <ESC>:call Run()<CR>
 
 func! Debug()
     exec 'w'
@@ -90,10 +93,21 @@ func! Debug()
 endfunc
 
 func! Run()
+	let g:ACM_terminal = "xfce4-terminal"
     exec 'w'
     exec '!g++ % -DDEBUG -g -O2 -o %<'
-    exec './%<'
+    exe ":!". g:ACM_terminal . " -x bash -c 'time ./%<; echo; echo 请按 Enter 键继续; read'"
 endfunc
+
+autocmd BufWritePre *.cpp :call Tidy()
+
+" arrange code
+function! Tidy()
+    let s:linenum = line(".")
+    execute ":normal gg=G"
+    execute ":".s:linenum
+    execute ":normal zz"
+endfunction
 
 
 " For ACM
