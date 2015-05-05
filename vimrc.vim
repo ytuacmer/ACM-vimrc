@@ -90,14 +90,15 @@ inoremap <F8> <ESC>:call Debug()<CR>
 noremap <F9> :call Run()<CR>
 inoremap <F9> <ESC>:call Run()<CR>
 
+
+let g:ACM_terminal = "xfce4-terminal"
 func! Debug()
     exec 'w'
     exec '!g++ % -DDEBUG -g -O2 -o %<'
-    exec '!gdb ./%<'
+    exe ":!". g:ACM_terminal . " -x bash -c 'gdb ./%<'"
 endfunc
 
 func! Run()
-	let g:ACM_terminal = "xfce4-terminal"
     exec 'w'
     exec '!g++ % -DDEBUG -g -O2 -o %<'
     exe ":!". g:ACM_terminal . " -x bash -c 'time ./%<; echo; echo 请按 Enter 键继续; read'"
