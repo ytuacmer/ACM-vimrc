@@ -5,8 +5,7 @@
 " License: GPL
 
 
-set background=dark
-colo evening		                                  "evening
+colo desert		                                  "evening
 syntax on  			                                  "syntax
 set laststatus=2                                      "启用状态栏信息
 set cmdheight=2                                       "设置命令行的高度为2，默认为1
@@ -22,6 +21,10 @@ set mouse=a			                                  "mouse use
 set foldmethod=indent                                 "indent 折叠方式
 set ignorecase                                        "搜索模式里忽略大小写
 set smartcase                                         "如果搜索模式包含大写字符，不使用 'ignorecase' 选项，只有在输入搜索模式并且打开 'ignorecase' 选项时才会使用
+
+" 高亮当前行列
+set cul
+set cuc
 
 " 去除状态栏
 set guioptions-=m
@@ -51,6 +54,7 @@ inoremap df <ESC>
 nnoremap <Leader>w :w<CR>
 nnoremap <Leader>b :ls<CR>
 nnoremap <Leader>q :q<CR>
+nnoremap <Leader>ee :e $MYVIMRC<CR>
 
 " file_explore
 nnoremap <Leader>d :Vexplore<CR>
