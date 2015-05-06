@@ -32,6 +32,9 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 
+" 括号的匹配提示
+set sm
+
 " 命令行补全
 set wildmenu
 
