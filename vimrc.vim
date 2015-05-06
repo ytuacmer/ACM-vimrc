@@ -36,9 +36,8 @@ set guioptions-=L
 set wildmenu
 
 " 窗口
-    winpos 10 10                                     "指定窗口出现的位置，坐标原点在屏幕左上角
-
-    set lines=38 columns=120                          "指定窗口大小，lines为高度，columns为宽度
+winpos 10 10                                     "指定窗口出现的位置，坐标原点在屏幕左上角
+set lines=38 columns=120                          "指定窗口大小，lines为高度，columns为宽度
 set guifont=DejaVu\ Sans\ Mono\ Bold\ 10              "设置字体:字号（字体名称空格用下划线代替）
 
 
@@ -55,9 +54,8 @@ nnoremap <Leader>w :w<CR>
 nnoremap <Leader>b :ls<CR>
 nnoremap <Leader>q :q<CR>
 nnoremap <Leader>ee :e $MYVIMRC<CR>
-
-" file_explore
-nnoremap <Leader>d :Vexplore<CR>
+nnoremap <Leader>nf :e $HOME/code/
+nnoremap <Leader>d  :Vexplore<CR>
 
 " edit
 nnoremap <Tab> ddO
@@ -92,35 +90,39 @@ inoremap <F9> <ESC>:call Run()<CR>
 
 
 let g:ACM_terminal = "xfce4-terminal"
+let g:compileCMD = "!g++ -Wall -lm --static -DDEBUG -g -O2 % -o %<"
+
 func! Debug()
-    exec 'w'
-    exec '!g++ % -DDEBUG -g -O2 -o %<'
-    exe ":!". g:ACM_terminal . " -x bash -c 'gdb ./%<'"
-endfunc
+    let s:pwd = expand("%:p:h")
+	exec 'w'
+	exec g:compileCMD
+	exe ":!". g:ACM_terminal . " -x bash -c 'cd ". s:pwd . "; gdb ./%<'"
+	endfunc
 
 func! Run()
-    exec 'w'
-    exec '!g++ % -DDEBUG -g -O2 -o %<'
-    exe ":!". g:ACM_terminal . " -x bash -c 'time ./%<; echo; echo 请按 Enter 键继续; read'"
-endfunc
+    let s:pwd = expand("%:p:h")
+	exec 'w'
+	exec g:compileCMD
+	exe ":!". g:ACM_terminal . " -x bash -c 'cd ". s:pwd . ";time ./%<; echo; echo 请按 Enter 键继续; read'"
+	endfunc
 
 autocmd BufWritePre *.cpp :call Tidy()
 
-" arrange code
+	" arrange code
 function! Tidy()
-    let s:linenum = line(".")
-    execute ":normal gg=G"
-    execute ":".s:linenum
-    execute ":normal zz"
-endfunction
+	let s:linenum = line(".")
+	execute ":normal gg=G"
+	execute ":".s:linenum
+	execute ":normal zz"
+	endfunction
 
 
-" For ACM
-nnoremap <Leader>ii :vs input<CR>
-nnoremap <Leader>io :vs ouput<CR>
-" temp file
-nnoremap <Leader>nt :call TempCpp()<CR> 
+	" For ACM
+	nnoremap <Leader>ii :vs input<CR>
+	nnoremap <Leader>io :vs ouput<CR>
+	" temp file
+	nnoremap <Leader>nt :call TempCpp()<CR> 
 
 func! TempCpp()
-    execute 'e /tmp/tmp.cpp'
-endfunction
+	execute 'e /tmp/tmp.cpp'
+	endfunction
