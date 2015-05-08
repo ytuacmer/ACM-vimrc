@@ -93,7 +93,7 @@ inoremap <F9> <ESC>:call Run()<CR>
 
 
 let g:ACM_terminal = "xfce4-terminal"
-let g:compileCMD = "!g++ -Wall -lm --static -DDEBUG -g -O2 % -o %<"
+let g:compileCMD = "!g++ -Wall -lm --static -DDEBUG -g -O0 % -o %<"
 
 func! Debug()
     let s:pwd = expand("%:p:h")
